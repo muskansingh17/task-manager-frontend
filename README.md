@@ -1,4 +1,4 @@
-# Task List Application
+# Task Manager Application
 
 This is a ReactJS application for managing tasks with user registration and authentication. Follow the steps below to set up and run the project locally.
 
@@ -35,7 +35,7 @@ Before you begin, ensure you have the following installed:
 1. **To configure the API base URL, create `.env` file in root folder and add following variables:**
 
     ```
-    // src/constant.js
+    // .env
     REACT_APP_API_BASE_URL=http://localhost:5000
     ```
 
