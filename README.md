@@ -21,7 +21,7 @@ Before you begin, ensure you have the following installed:
 1. **Clone the repository:**
 
    ```sh
-   git clone https://github.com/yourusername/task-list-app.git
+   git clone https://github.com/muskansingh17/task-manager-frontend.git
    cd task-list-app
    ```
 
@@ -32,11 +32,11 @@ Before you begin, ensure you have the following installed:
 
 ## Configuration
 
-1. **To configure the API base URL, edit the src/constant.js file:**
+1. **To configure the API base URL, create `.env` file in root folder and add following variables:**
 
     ```
     // src/constant.js
-    export const API_BASE_URL = 'http://your-api-base-url.com';
+    REACT_APP_API_BASE_URL=http://localhost:5000
     ```
 
 ## Running the Application
