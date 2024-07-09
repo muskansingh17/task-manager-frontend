@@ -1,0 +1,135 @@
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s;
+}
+
+.Overlay.open {
+  opacity: 1;
+}
+
+.label {
+  text-align: left;
+}
+
+.Modal {
+  background-color: #fff;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+}
+
+.CloseButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.Modal > div:first-child {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  text-align: left; /* left-align the title */
+}
+
+.ModalBody {
+  padding: 16px;
+}
+
+.FormGroup {
+  margin-bottom: 16px;
+}
+
+.FormGroup label {
+  display: block;
+}
+
+.FormGroup input[type="text"],
+.FormGroup textarea,
+.FormGroup select {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.FormGroup input,
+.FormGroup textarea,
+.FormGroup select {
+  margin: 4px 0;
+}
+
+.FormGroup textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.FormGroup input[type="text"]:focus,
+.FormGroup textarea:focus,
+.FormGroup select:focus {
+  border-color: #aaa;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.FormGroupRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.FormGroupHalf {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.FormGroupHalf:last-child {
+  margin-right: 0;
+}
+
+.ModalFooter {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+
+.ModalFooter button[type="button"],
+.ModalFooter button[type="submit"] {
+  width: 100px;
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.ModalFooter button[type="button"] {
+  background-color: #ccc;
+  color: #333;
+  border: none;
+}
+
+.submit-button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  margin-left: 10px;
+}
+
+.ModalFooter button[type="submit"]:hover,
+.submit-button:hover {
+  background-color: #3e8e41;
+}

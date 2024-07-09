@@ -1,0 +1,203 @@
+.task-list {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logout {
+  display: flex;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+
+h2 {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.filter {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.filter select {
+  margin: 10px;
+  padding: 5px;
+  font-size: 16px;
+}
+
+button {
+  display: block;
+  margin: 0 auto 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.table-container {
+  overflow-x: auto;
+  max-width: 100%;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  /* Enable horizontal scrolling */
+  white-space: nowrap; /* Prevent table cells from wrapping */
+
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.action-buttons i {
+  margin: 0 5px;
+  padding: 8px;
+  font-size: 20px;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.action-buttons i:hover {
+  color: #0056b3;
+}
+
+.Modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  max-width: 90%;
+  width: 500px;
+  box-sizing: border-box;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 999;
+}
+
+input,
+select {
+  display: block;
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button[type="button"] {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.logout-btn {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #dc3545; /* Example color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.logout-btn:hover {
+  background-color: #c82333; /* Darker shade on hover */
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 22px; /* Decreased font size for small screens */
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+
+  .filter {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  th,
+  td {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .filter select {
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  .Modal {
+    width: 90%;
+    padding: 15px;
+  }
+
+  input,
+  select {
+    padding: 8px;
+  }
+
+  button[type="button"] {
+    padding: 8px;
+  }
+}
+
+@media (min-width: 600px) {
+  .filter {
+    flex-wrap: nowrap;
+  }
+}
