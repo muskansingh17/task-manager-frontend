@@ -1,9 +1,8 @@
-// auth/Register.js
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../../api";
 import "./Register.css";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -14,7 +13,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     await register({ name, email, password });
-    alert("Registration successful. Please login.");
+    toast.success("Registration successful. Please login.");
     navigate("/login");
   };
 
