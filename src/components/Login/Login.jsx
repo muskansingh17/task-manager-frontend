@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../slices/user.slice";
+import Loader from "../Loader/Loader";
 import "./Login.css";
 
 const Login = () => {
@@ -9,7 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { status, error } = useSelector((state) => state.user);
+  const { status } = useSelector((state) => state.user);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -19,6 +20,10 @@ const Login = () => {
       }
     });
   };
+
+  if (status === 'loading') {
+    return <Loader />
+  }
 
   return (
     <div className="login-screen">
@@ -44,8 +49,6 @@ const Login = () => {
         <p>
           Don't have an account? <Link to="/register">Register here</Link>.
         </p>
-        {status === "loading" && <p>Loading...</p>}
-        {error && <p>Error: {error.message}</p>}
       </div>
     </div>
   );

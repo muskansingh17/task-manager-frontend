@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { verifyToken } from "../slices/user.slice";
+import Loader from "./Loader/Loader";
 
 const PrivateRoute = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  // const status = useSelector((state) => state.user.status);
+  const status = useSelector((state) => state.user.status);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -25,9 +26,9 @@ const PrivateRoute = ({ children }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, isAuthenticated]);
 
-  // if (status === "loading") {
-  //   return <div>Loading...</div>;
-  // }
+  if (status === "loading") {
+    return <Loader />;
+  }
 
   // Redirect to login if not authenticated and not on login or register page
   if (

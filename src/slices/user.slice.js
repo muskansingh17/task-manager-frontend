@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 const initialState = {
   isAuthenticated: false,
   user: null,
-  status: "loading",
+  status: "idle",
 };
 
 export const verifyToken = createAsyncThunk(

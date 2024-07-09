@@ -7,18 +7,16 @@ import { createTask, deleteTask, shareTask, updateTask } from "../../api";
 import { fetchTasks } from "../../slices/task.slice";
 import { logout } from "../../slices/user.slice";
 import { connectSocket, disconnectSocket } from "./socket";
-import "./TaskList.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { capitalize } from "../../utils";
+import "./TaskList.css";
 
 const TaskList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.user);
   const tasks = useSelector((state) => state.tasks.tasks);
-  const status = useSelector((state) => state.tasks.status);
-  const error = useSelector((state) => state.tasks.error);
 
   const [filter, setFilter] = useState({
     search: "",
@@ -127,14 +125,6 @@ const TaskList = () => {
     }
     return true;
   });
-
-  if (status === "loading") {
-    return <div>Loading tasks...</div>;
-  }
-
-  if (status === "failed") {
-    return <div>Error: {error}</div>;
-  }
 
   return (
     <div className="task-list">
