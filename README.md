@@ -22,7 +22,7 @@ Before you begin, ensure you have the following installed:
 
    ```sh
    git clone https://github.com/muskansingh17/task-manager-frontend.git
-   cd task-list-app
+   cd task-manager-frontend
    ```
 
 2. **Install dependencies:**
