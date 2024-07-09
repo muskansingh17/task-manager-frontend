@@ -3,7 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import TaskRow from "../TaskRow";
 import TaskModal from "../TaskModal/TaskModal";
 import Filter from "../Filter";
-import { createTask, deleteTask, shareTask, updateTask } from "../../api";
+import {
+  createTask,
+  deleteTask,
+  getUserEmails,
+  shareTask,
+  updateTask,
+} from "../../api";
 import { fetchTasks } from "../../slices/task.slice";
 import { logout } from "../../slices/user.slice";
 import { connectSocket, disconnectSocket } from "./socket";
@@ -27,6 +33,7 @@ const TaskList = () => {
   const [modalTask, setModalTask] = useState(null);
   const [modalMode, setModalMode] = useState("view");
   const [isLoading, setIsLoading] = useState(false);
+  const [userEmails, setUserEmails] = useState([]);
 
   const handleLogout = useCallback(() => {
     dispatch(logout());
@@ -52,55 +59,73 @@ const TaskList = () => {
     [navigate]
   );
 
-  const handleEditTask = useCallback(async (taskId, updatedTask) => {
-    try {
-      setIsLoading(true);
-      await updateTask(taskId, updatedTask);
-      setModalIsOpen(false);
-    } catch (error) {
-      if (error.response.status === 401) {
-        toast.error("You are logged out");
-        navigate("/login");
-      } else {
-        toast.error(error.response.data.message);
+  const handleEditTask = useCallback(
+    async (taskId, updatedTask) => {
+      try {
+        setIsLoading(true);
+        await updateTask(taskId, updatedTask);
+        setModalIsOpen(false);
+      } catch (error) {
+        if (error.response.status === 401) {
+          toast.error("You are logged out");
+          navigate("/login");
+        } else {
+          toast.error(error.response.data.message);
+        }
+      } finally {
+        setIsLoading(false);
       }
-    } finally {
-      setIsLoading(false);
-    }
-  }, [navigate]);
+    },
+    [navigate]
+  );
 
-  const handleDeleteTask = useCallback(async (taskId) => {
-    try {
-      setIsLoading(true);
-      await deleteTask(taskId);
-    } catch (error) {
-      if (error.response.status === 401) {
-        toast.error("You are logged out");
-        navigate("/login");
-      } else {
-        toast.error(error.response.data.message);
+  const handleDeleteTask = useCallback(
+    async (taskId) => {
+      try {
+        setIsLoading(true);
+        await deleteTask(taskId);
+      } catch (error) {
+        if (error.response.status === 401) {
+          toast.error("You are logged out");
+          navigate("/login");
+        } else {
+          toast.error(error.response.data.message);
+        }
+      } finally {
+        setIsLoading(false);
       }
-    } finally {
-      setIsLoading(false);
-    }
-  }, [navigate]);
+    },
+    [navigate]
+  );
 
-  const handleShareTask = useCallback(async (taskId, sharingDetails) => {
-    try {
-      setIsLoading(true);
-      await shareTask(taskId, sharingDetails);
-      setModalIsOpen(false);
-    } catch (error) {
-      if (error.response.status === 401) {
-        toast.error("You are logged out");
-        navigate("/login");
-      } else {
-        toast.error(error.response.data.message);
+  const handleShareTask = useCallback(
+    async (taskId, sharingDetails) => {
+      try {
+        setIsLoading(true);
+        await shareTask(taskId, sharingDetails);
+        setModalIsOpen(false);
+      } catch (error) {
+        if (error.response.status === 401) {
+          toast.error("You are logged out");
+          navigate("/login");
+        } else {
+          toast.error(error.response.data.message);
+        }
+      } finally {
+        setIsLoading(false);
       }
-    } finally {
-      setIsLoading(false);
+    },
+    [navigate]
+  );
+
+  const fetchUserEmails = useCallback(async () => {
+    try {
+      const userEmailsResponse = await getUserEmails();
+      setUserEmails(userEmailsResponse.data.data);
+    } catch (error) {
+      console.error("Error fetching user emails:", error);
     }
-  }, [navigate]);
+  }, []);
 
   useEffect(() => {
     dispatch(fetchTasks());
@@ -133,9 +158,7 @@ const TaskList = () => {
           <h1>Task Manager</h1>
         </div>
         <div className="logout">
-          <h2>
-            Hello {capitalize(user.name)}
-          </h2>
+          <h2>Hello {capitalize(user.name)}</h2>
           <button className="logout-btn" onClick={handleLogout}>
             Logout
           </button>
@@ -186,7 +209,8 @@ const TaskList = () => {
                     setModalIsOpen(true);
                   }}
                   onDelete={() => handleDeleteTask(task._id)}
-                  onShare={() => {
+                  onShare={async () => {
+                    await fetchUserEmails();
                     setModalTask(task);
                     setModalMode("share");
                     setModalIsOpen(true);
@@ -209,6 +233,7 @@ const TaskList = () => {
         }
         task={modalTask}
         mode={modalMode}
+        userEmails={userEmails}
       />
       {isLoading && <div className="loading-overlay">Processing...</div>}
     </div>

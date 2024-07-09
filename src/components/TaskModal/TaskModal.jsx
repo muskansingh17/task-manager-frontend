@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./TaskModal.css";
-import { getUserEmails } from "../../api";
 
-const TaskModal = ({ isOpen, onRequestClose, onSave, task, mode }) => {
+const TaskModal = ({ isOpen, onRequestClose, onSave, task, mode, userEmails }) => {
   const initialFormData = {
     title: "",
     description: "",
@@ -15,7 +14,6 @@ const TaskModal = ({ isOpen, onRequestClose, onSave, task, mode }) => {
   };
 
   const [formData, setFormData] = useState(initialFormData);
-  const [userEmails, setUserEmails] = useState([]);
 
   useEffect(() => {
     if (mode === "share") {
@@ -39,20 +37,6 @@ const TaskModal = ({ isOpen, onRequestClose, onSave, task, mode }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, task, mode]);
-
-  useEffect(() => {
-    const fetchUserEmails = async () => {
-      try {
-        const userEmailsResponse = await getUserEmails();
-        setUserEmails(userEmailsResponse.data.data);
-      } catch (error) {
-        console.error("Error fetching user emails:", error);
-      }
-    };
-    if (mode === "share") {
-      fetchUserEmails();
-    }
-  }, [mode]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

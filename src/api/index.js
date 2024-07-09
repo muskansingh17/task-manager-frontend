@@ -13,6 +13,18 @@ const getHeaders = () => {
   };
 };
 
+axios.interceptors.request.use(
+  (config) => {
+    config.headers["Cache-Control"] = "no-cache";
+    config.headers["Pragma"] = "no-cache";
+    config.headers["Expires"] = "0";
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 api.interceptors.response.use(
   (response) => {
     return response;

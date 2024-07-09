@@ -6,7 +6,6 @@ const TaskRow = ({ task, onEdit, onDelete, onShare }) => {
     onShare(task);
   };
 
-  // Determine if the current user can perform actions based on task permission
   const canEdit =
     task.permission === "owner" || task.permission === "collaborator";
   const canDelete = task.permission === "owner";
